@@ -1,1 +1,25 @@
+Tema site-ului este cea a unui site de vanzari auto 
+Site-ul este alcatuit din doua componente (Componenta utilizator si componenta administrator);
+Componenta Utilizator va pune la dispozitia clientului urmatoarele functionalitati;
+    1.Cautarea obiectelor de interes cat si filtrarea acestora
+    2.Posibilitatea de a mentine o lista de obiecte favorite asociata contului curent
+    3.Posibilitatea de a crea un cont de utilizator cat si de a-i aduce modificari ulterioare
+    4.Pe baza contului de utilizator se vor putea face postari de obiecte proprii.
 
+Componenta Administrator va pune la dispozitia administratorului urmatoarele functionalitati
+    1.Acces deplin la conturile clientilor
+    2.Posibilitatea de posta diverse reclame. 
+    3.Acces la corectarea sau inlaturarea produselor ce nu corespund conform descrierii.
+    4.Posibilitatea de a  crea alte conturi de administrator 
+
+
+
+-----------------------------------------------------------------------------
+Schema bazei de date
+    Tabele:
+                1.Conturi clienti
+                2.Conturi administratori
+                3.Tabela Brand
+                4.Tabela Model
+                5.Tabela Dotari
+                6.Tabel Descrere
