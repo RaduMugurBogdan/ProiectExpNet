@@ -1,0 +1,76 @@
+#main_container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#main_details_container{
+    display:flex;
+    flex-direction: column;
+    width:500px;
+    height: 300px;
+    padding-bottom: 25px;
+    padding-top:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0px 1px 15px black;
+}
+#username_container,#posts_title_container{
+    height:100px;  
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+    align-items: center;
+}
+
+#user_picture{
+    width:90px;
+    height:90px;
+    border-radius: 100%;
+    color:white;
+    background-color: lightblue;
+    margin-left:10px;
+}
+#username_label,#posts_label{
+    margin-left:25px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#contact_data_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 25px;
+}
+.contact_item{
+    width:auto;
+    display: flex;
+    flex-direction: row;
+    margin-top:5px;
+    margin-bottom:5px;
+    margin-left: 10px;
+}
+.contact_label{
+    font-weight: bold;
+    text-align: right;
+    width:100px;
+    margin-right: 10px;
+}
+.contact_del_line{
+    width: 90%;
+    color:black;
+    font-size: 1px;
+}
+
+#posts_container{
+    width: 1000px;
+    min-height: 500px;
+    box-shadow: 0px 1px 15px black;
+    margin-left:25px;
+    padding-top:10px;
+}
+
+/*
+*{
+    border-style: solid;
+    border-width: 1px;
+}*/
