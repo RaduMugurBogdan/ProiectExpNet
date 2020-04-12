@@ -29,6 +29,9 @@ switch ($path[2]) {
         break;
     case 'visit_page': //pagina de vizita a unui client
         break;
+    case 'view_post':
+        //controller-ul responsabil de afisarea postarii
+        break;
     default:
         echo 'error page';
     break;
