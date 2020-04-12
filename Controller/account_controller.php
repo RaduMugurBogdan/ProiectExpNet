@@ -3,7 +3,7 @@
 
 class AccountController{
     private function perform_login(){
-        if(isset($_SESSION['logged']) && $_SESSION['logged']==false){
+        if(isset($_SESSION['logged'])==true && $_SESSION['logged']==false){
             //redirectionare spre pagina de logare
             header('Location:./View/login_page_view/login_page.php');
         }else{
@@ -14,6 +14,7 @@ class AccountController{
     private function perform_account_creat(){
         if(isset($_SESSION['logged'])==true && $_SESSION['logged']==false){
             //creare_cont
+            header('Location:./View/creat_acc_page_view/creat_acc_page.php');
         }else{
             //redirectare catre pagina de home ,daca exista deja un cont activ
             //in sesiune

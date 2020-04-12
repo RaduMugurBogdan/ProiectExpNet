@@ -46,17 +46,6 @@
                 <div class="input_label">Adresa</div>
                 <textarea class="input_text_area"></textarea>
             </div>
-
-
-
-
-
-
-
-
-
-
-
             <hr class="sep_hr">
             <div id="buttons_panel">
                 <input type="button" value="Finalizare" class="user_button">    
