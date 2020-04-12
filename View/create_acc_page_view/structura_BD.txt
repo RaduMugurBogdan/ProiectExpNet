@@ -1,0 +1,40 @@
+structura bazei de date
+
+1. tabela useri, campuri:
+    user_id
+    user_nume
+    user_prenume
+    user_phone
+    user_email
+    adresa
+
+2. tabela credentiale,campuri
+    cred_id
+    user_id
+    user_password
+3. tabela pivot_postari, campuri
+    id
+    user_id
+    post_id
+4. tabela postari
+    id
+    id_brand
+    id_model
+    id_p
+
+5. tabela  brand
+    id_brand
+    nume_brand;
+
+        +tabela_pivot
+
+6. tabela model
+  id_model
+  nume_model;
+
+        +tabela pivot
+
+7. tabela proprietati_model
+   id
+   id_p
+   lista propietati
