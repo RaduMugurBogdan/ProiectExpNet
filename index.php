@@ -1,11 +1,13 @@
 <?php
-
+session_start();
 //url path starting from localhost
 $request = $_SERVER['REQUEST_URI'];
 
 $path= explode("/",$request);
 
-//var_dump($path);
+if(isset($_SESSION['logged'])==false){
+    $_SESSION['logged']=false;
+}
 
  
 switch ($path[2]) {
