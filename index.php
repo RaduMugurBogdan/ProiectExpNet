@@ -12,13 +12,16 @@ if(isset($_SESSION['logged'])==false){
  
 switch ($path[2]) {
     case '' : 
-        echo '/';//index page identic cu /home
+        header('Location:./View/home_page_view/home_page.php');//index page identic cu /home
         break;
     case 'home' ://pagina de index
+        header('Location:./View/home_page_view/home_page.php');
         break;
     case 'add_post'://adaugare postare
         break;
     case 'login': //proces de login
+        include __DIR__.'/Controller/account_controller.php';
+        new AccountController('login');
         break;
     case 'create_account'://creare cont
         break;
