@@ -108,6 +108,20 @@ body{
 .user_button:active{
     background-color:#0074D9;
 }
+
+.error_label{
+    width:500px;
+    margin-top:5px;
+    margin-bottom:5px;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+    color:yellow;
+}
 @media only screen and (max-width: 600px) {
     #main_container{
         width:100%;
