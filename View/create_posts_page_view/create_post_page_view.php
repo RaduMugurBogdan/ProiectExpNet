@@ -105,6 +105,15 @@
                 </span>
                 <input type="text" class="field_tag" >    
             </section>
+
+            <hr class="section_del_line">
+            <section class="field_container">
+                <span class="field_label">
+                    Fotografii
+                </span>
+                <input type="file" multiple="" class="field_tag">    
+            </section>
+            
             <hr class="section_del_line">
             <section class="field_container" id="desc_area">
                 <span class="field_label">
