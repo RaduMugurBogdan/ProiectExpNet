@@ -10,7 +10,10 @@ class DatabaseInit{
             $this->conn=null;
         }
     }
-    private function load_brand_names(){
+    public function get_db_conn(){
+        return $this->conn;
+    }
+    public function load_brand_names(){
         if($this->conn==null){
             return;
         }
@@ -50,10 +53,7 @@ class DatabaseInit{
 
     public function __construct(){
         $this->init_database_conn();
-        $this->load_brand_names();
     }
 }
-
-new DatabaseInit();
 
 ?>
