@@ -46,8 +46,11 @@ class AccountModel{
             $result=null;
             $stmt=$this->conn->prepare($sql_query);
             $stmt->execute();
-            $result=$stmt->fetchAll(PDO::FETCH_ASSOC);   
-            return ($result[0]['password']==md5($password));
+            $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result[0]['password']==md5($password)){
+                return $result;
+            }   
+            return null;
         }else{
             return false;
         }   

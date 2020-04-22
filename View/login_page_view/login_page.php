@@ -6,7 +6,6 @@
         <title>Login Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">  
         <link rel="stylesheet" href="./login_page_style.css">
-        
     </head>
     <body>        
         <form id="main_container" method="POST" action="../../Model/login_aux.php">

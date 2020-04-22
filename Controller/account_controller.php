@@ -1,46 +1,51 @@
 <?php
-
-
+session_start();
 class AccountController{
     private function perform_login(){
-        if(isset($_SESSION['logged'])==true && $_SESSION['logged']==false){
-            //redirectionare spre pagina de logare
-            header('Location:./View/login_page_view/login_page.php');
+        if(isset($_SESSION['logged_in'])==false){
+            header('Location:../View/login_page_view/login_page.php');
+            //header('Location:login');
         }else{
-            //redirectare catre pagina de home ,daca exista deja un cont activ
-            //in sesiune
+            header('Location:../View/home_page_view/home_page.php');
         }
     }
     private function perform_account_creat(){
-        if(isset($_SESSION['logged'])==true && $_SESSION['logged']==false){
+        if(isset($_SESSION['logged_in'])==true && $_SESSION['logged_in']==false){
             //creare_cont
-            header('Location:./View/creat_acc_page_view/creat_acc_page.php');
+            header('Location:../View/creat_acc_page_view/creat_acc_page.php');
         }else{
+            header('Location:../View/home_page_view/home_page.php');           
             //redirectare catre pagina de home ,daca exista deja un cont activ
             //in sesiune
         }
     }
     private function perform_account_config(){
-        if(isset($_SESSION['logged'])==true && $_SESSION['logged']==true){
+        if(isset($_SESSION['logged_in'])==true){
             //redirectionare spre controller-ul de administrare a contului
+            header('Location:../View/personal_posts_page_view/personal_posts_page.php');
         }else{
             //redirectare catre pagina de login  ,daca exista deja un cont activ
             //in sesiune
+            header('Location:../View/home_page_view/home_page.php');           
         }
     }
-    function dummy_method(){
-        echo "message from dummy method";
+    private function perform_logg_out(){
+        session_destroy();
+        header('Location:../View/home_page_view/home_page.php');  
     }
     function __construct($service_name){
-        //session_start();
         switch($service_name){
             case 'login':
                 $this->perform_login();
                 break;
             case 'create_account':
-                perform_account_creat();
+                $this->perform_account_creat();
                 break;
             case 'perform_account_config':
+                $this->perform_account_config();
+            break;
+            case 'logg_out':
+                $this->perform_logg_out();
             break;
             default:
                 echo "error page";
@@ -50,5 +55,8 @@ class AccountController{
 
 }
 
+if(isset($_GET['option'])){
+    new AccountController($_GET['option']);
+}
 
 ?>

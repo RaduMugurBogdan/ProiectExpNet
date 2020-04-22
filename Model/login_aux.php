@@ -20,7 +20,21 @@
         $_SESSION['login_email_error']="Unknown email address";
     }else if(!isset($_SESSION['login_password_error'])){
         $action=$acc_object->perform_login($_POST['email'],$_POST['password']);
-        if($action==true){
+        if($action!=null){
+            unset($_SESSION['logged_in']);
+            unset($_SESSION['user_email_address']);
+            unset($_SESSION['user_last_name']);
+            unset($_SESSION['user_first_name']);
+            unset($_SESSION['user_address']);
+            unset($_SESSION['user_phone']);
+
+            $_SESSION['logged_in']=true;
+            $_SESSION['user_email_address']=$action[0]['email'];
+            $_SESSION['user_last_name']=$action[0]['last_name'];
+            $_SESSION['user_first_name']=$action[0]['first_name'];
+            $_SESSION['user_address']=$action[0]['address'];
+            $_SESSION['user_phone']=$action[0]['phone'];
+            
             header("Location: ../View/home_page_view/home_page.php");
             exit;
         }else{
