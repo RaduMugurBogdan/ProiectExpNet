@@ -32,83 +32,110 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
 
         <section class="super_container">
             <section class="main_container"> 
-                <section class="filter_container">
+                <form class="filter_container"  method="post" action="../../Model/perform_request.php">
                 <div class="filter_label">Filtre</div>
                     <div class="filter_category">
                         <span class="filter_title_label">Brand</span>
-                        <select class="filter_input" onchange="change_brand(this)" id="brand_input_id">
-                            <option selected="selected">
-                                Alege
-                            </option>
-                            <option>
-                                BMW
-                            </option>
+                        <select class="filter_input" onchange="change_brand(this)" id="brand_input_id" name="brand">
+                            <?php
+                                include '../../Model/init_database.php';
+                                if(!isset($_SESSION['brand'])){
+                                    echo "<option selected>";
+                                }else{
+                                    echo "<option>";
+                                }
+                                echo "Alege";
+                                echo "</option>";
+                                $result=(new DatabaseInit())->get_all_valid_brands();
+                                for($i=0;$i<count($result);$i++){
+                                    if(isset($_SESSION['brand'])){
+                                        echo "<option selected>";
+                                    }else{
+                                        echo "<option>";
+                                    }
+                                    echo $result[$i]['NUME_BRAND'];
+                                    echo "</option>";
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="filter_category">
                         <span class="filter_title_label">Model</span>
-                        <select class="filter_input" disabled id="model_input_id" onchange="change_model(this)">
-                            <option selected="selected">
-                                Alege
-                            </option>
-                            <option>
-                                5 Series
-                            </option>
+                        <select class="filter_input" id="model_input_id" onchange="change_model(this)" name="model">
+                             <?php
+                                if(!isset($_SESSION['model'])){
+                                    echo "<option selected>";
+                                }else{
+                                    echo "<option>";
+                                }
+                                echo "Alege";
+                                echo "</option>";
+                                $result=(new DatabaseInit())->get_all_valid_models($_SESSION['brand']);
+                                for($i=0;$i<count($result);$i++){
+                                    if(isset($_SESSION['model'])){
+                                        echo "<option selected>";
+                                    }else{
+                                        echo "<option>";
+                                    }
+                                    echo $result[$i]['NUME_MODEL'];
+                                    echo "</option>";
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="filter_category">
                         <span class="filter_title_label">Anul Fabricatiei</span>
                         <div class="multiple_inputs_cont">
-                            <input type="number" class="filter_input dep_field" id="start_year"  disabled>
-                            <input type="number" class="filter_input dep_field" id="final_year" disabled>
+                            <input type="number" class="filter_input dep_field" id="start_year" name="start_year"   value="<?php if(isset($_SESSION['min_year'])) echo $_SESSION['min_year']; ?>">
+                            <input type="number" class="filter_input dep_field" id="final_year" name="final_year"  value="<?php if(isset($_SESSION['max_year'])) echo $_SESSION['max_year']; ?>">
                         </div>
                     </div>
                     <div class="filter_category">
                         <span class="filter_title_label">Kilometraj</span>
                         <div class="multiple_inputs_cont">
-                            <input type="number" class="filter_input dep_field" min="0" id="start_kil" disabled>
-                            <input type="number" class="filter_input dep_field" min="0" id="final_kil" disabled>
+                            <input type="number" class="filter_input dep_field" min="0" id="start_kil" name="start_kil"  value="<?php if(isset($_SESSION['min_kil'])) echo $_SESSION['min_kil']; ?>">
+                            <input type="number" class="filter_input dep_field" min="0" id="final_kil" name="final_kil" value="<?php if(isset($_SESSION['max_kil'])) echo $_SESSION['max_kil']; ?>">
                         </div>
                     </div>
                     <div class="filter_category">
                         <span class="filter_title_label">Pret</span>
                         <div class="multiple_inputs_cont">
-                            <input type="number" class="filter_input dep_field" min="0" id="start_price" disabled>
-                            <input type="number" class="filter_input dep_field" min="0" id="final_price" disabled>
+                            <input type="number" class="filter_input dep_field" min="0" id="start_price" name="start_price"  value="<?php if(isset($_SESSION['min_price'])) echo $_SESSION['min_price']; ?>">
+                            <input type="number" class="filter_input dep_field" min="0" id="final_price" name="final_price"  value="<?php if(isset($_SESSION['max_price'])) echo $_SESSION['max_price']; ?>">
                         </div>
                     </div>
                     <div class="filter_category">
                         <span class="filter_title_label">Combustibil</span>
                         <div class="multiple_inputs_cont">
                            <div>
-                                <input type="checkbox" class="dep_field" disabled>
+                                <input type="checkbox" class="dep_field" value="diesel" name="comb[]">
                                 <span>Diesel</span>
                            </div>
                            <div>
-                                <input type="checkbox" class="dep_field" disabled>
+                                <input type="checkbox" class="dep_field" value="benzina" name="comb[]">
                                 <span>Benzina</span>
                           </div>
                           <div>
-                                <input type="checkbox" class="dep_field" disabled>
+                                <input type="checkbox" class="dep_field" value="electrica" name="comb[]">
                                 <span>Electrica</span>
                           </div> 
                           <div>
-                                <input type="checkbox" class="dep_field" disabled>
+                                <input type="checkbox" class="dep_field" value="hibrid" name="comb[]">
                                 <span>Hibrid</span>
                          </div>
                          <div>
-                                <input type="checkbox" class="dep_field" dsiabled>
+                                <input type="checkbox" class="dep_field" value="toate" name="comb[]">
                                 <span>Toate</span>
                          </div>
                         </div>
                     </div>
                     
                     <div class="filter_category" id="buttons_container">
-                        <input type="submit" class="submit_button" value="Cauta" disabled>
-                        <input type="submit" class="submit_button" value="Reset" disabled onclick="reset_filters(this)">
+                        <input type="submit" class="submit_button" value="Cauta" onclick="perform_request(this)"> 
+                        <input type="submit" class="submit_button" value="Reset" onclick="reset_filters(this)">
                     </div>
-                </section>
-    
+                </form>
+            
                 <section class="mini_views_container">
                     <section class="cars_posts_container">
                     </section>
@@ -124,6 +151,11 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
             <section class="footer_container">
             </section>    
         </section>
+
+
+
+
+
         <script src="./filter_script.js"></script>
     </body>
 </html>

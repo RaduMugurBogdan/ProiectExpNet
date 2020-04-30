@@ -30,10 +30,38 @@
             <hr class="section_del_line">
             <section class="field_container">
                 <span class="field_label">
+                    Pret
+                </span>    
+                <input type="number" class="field_tag" min="0">
+            </section>
+            <hr class="section_del_line">
+            <section class="field_container">
+                <span class="field_label">
                     Anul Fabricatiei
                 </span>    
                 <input type="number" class="field_tag" min="1986" max="2020" value="2020">
             </section>
+            <hr class="section_del_line">
+            <section class="field_container">
+                <span class="field_label">
+                    Carburant
+                </span>
+                <select class="field_tag">
+                    <option>
+                        Diesel
+                    </option>
+                    <option>
+                        Benzina
+                    </option>
+                    <option>
+                        Hibrid
+                    </option>
+                    <option>
+                        Electrica
+                    </option>
+                </select>
+            </section>
+            
             <hr class="section_del_line">
             <section class="field_container">
                 <span class="field_label">

@@ -13,6 +13,20 @@ class DatabaseInit{
     public function get_db_conn(){
         return $this->conn;
     }
+    public function get_all_valid_brands(){
+        $query="SELECT DISTINCT NUME_BRAND FROM BRANDURI JOIN POSTARI ON BRANDURI.ID=POSTARI.ID_BRAND";
+        $stmt=$this->conn->prepare($query);
+        $stmt->execute();
+        $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function get_all_valid_models($brand_name){
+        $query="SELECT DISTINCT NUME_MODEL FROM BRANDURI JOIN POSTARI ON BRANDURI.ID=POSTARI.ID_BRAND JOIN MODELE ON POSTARI.ID_MODEL=MODELE.ID WHERE LOWER(NUME_BRAND)=LOWER('${brand_name}')";
+        $stmt=$this->conn->prepare($query);
+        $stmt->execute();
+        $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function load_brand_names(){
         if($this->conn==null){
             return;
