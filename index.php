@@ -14,11 +14,14 @@ switch ($path[2]) {
     case 'add_post'://adaugare postare
         break;
     case 'login': //proces de login
-        include './Controller/account_controller.php';
-        new AccountController('login');
+        echo $_SERVER['DOCUMENT_ROOT'];
+        exit;
+        //header('Location:login');
+        //include getcwd().'/Controller/account_controller.php';
+        //new AccountController('login');
         break;
     case 'create_account'://creare cont
-        header('Location:\Controller\account_controller.php?option=create_account');
+        //header('Location.\Controller\account_controller.php?option=create_account');
         //include __DIR__.'\Controller\account_controller.php';
         //new AccountController('create_account');
         break;

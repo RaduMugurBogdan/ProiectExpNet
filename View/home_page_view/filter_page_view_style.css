@@ -1,0 +1,125 @@
+body{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+.main_container{
+    width:1500px;
+    height:auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+    padding-top:50px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+}
+.filter_container{
+    top:10px;
+    width:300px;
+    max-height:800px;
+    border-right-style: solid;
+    border-width: 1px;
+    padding-top:10px;
+    background-color:lightblue;
+    color:rgb(0,127,255)
+}
+
+.mini_views_container{
+    background-color: lightblue;
+    height:auto;
+    min-height: 500px;
+    width: 1000px;
+    margin-left:20px;
+    padding-top: 10px;
+    display:flex;
+    flex-direction: column;
+}
+
+.mini_views_container,.filter_container{
+    box-shadow: 0px 0px 8px black;
+}
+.filter_label{
+    font-weight: bold;
+    font-size: 25px;;
+}
+.filter_input{
+    width:100px;
+    height:30px;
+    border-radius: 5px;
+    border-style:none;
+}
+.filter_title_label{
+    margin-bottom: 2px;
+    font-weight: bold;
+}
+.filter_category{
+    margin-top:15px;
+    margin-bottom: 15px;
+    margin-left:5px;
+    display: flex;
+    flex-direction: column;
+}
+.filter_del_line{
+    width:100%;
+    align-self: center;
+    font-size: 1px;
+}
+.submit_button{
+    width:80px;
+    height:30px;
+    font-size: 15px;
+    font-weight: bold;
+    color:white;
+    background-color: rgb(0,127,255);
+    outline: none;
+    border-style: none;
+    border-radius: 5px;
+    margin-right: 2px;
+}
+#buttons_container{
+    display: flex;
+    flex-direction: row;
+}
+.submit_button:active{
+    color:rgb(0,127,255);
+    background-color: white;
+    border-style:solid;
+    border-color:rgb(0,127,255);
+}
+.submit_button:disabled{
+    background-color: gray;
+}
+.menu_buttons_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content:center;
+    align-items: baseline;
+    padding-bottom: 15px;
+    padding-top:15px;
+    color:rgb(0,127,255)
+}
+.arr{
+    font-size:25px;
+}
+.arr:active{
+    color:white;
+}
+.page_index_container{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+.buttons_del_line{
+    width:80%;
+    font-size: 1px;
+    border-style:solid;
+    color:white;
+}
+/*
+*{
+    border-style: solid;
+}*/

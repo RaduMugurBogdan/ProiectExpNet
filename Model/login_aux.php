@@ -34,7 +34,6 @@
             $_SESSION['user_first_name']=$action[0]['first_name'];
             $_SESSION['user_address']=$action[0]['address'];
             $_SESSION['user_phone']=$action[0]['phone'];
-            
             header("Location: ../View/home_page_view/home_page.php");
             exit;
         }else{

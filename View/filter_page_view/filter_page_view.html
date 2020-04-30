@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="./filter_page_view_style.css">
+        <link rel="stylesheet" href="../Components/mini_view/mini_view.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    </head>
+    <body>
+        <section class="main_container"> 
+            <section class="filter_container">
+            <div class="filter_label">Filtre</div>
+                <div class="filter_category">
+                    <span class="filter_title_label">Brand</span>
+                    <select class="filter_input" onchange="change_brand(this)" id="brand_input_id">
+                        <option selected="selected">
+                            Alege
+                        </option>
+                        <option>
+                            BMW
+                        </option>
+                    </select>
+                </div>
+                <div class="filter_category">
+                    <span class="filter_title_label">Model</span>
+                    <select class="filter_input" disabled id="model_input_id" onchange="change_model(this)">
+                        <option selected="selected">
+                            Alege
+                        </option>
+                        <option>
+                            5 Series
+                        </option>
+                    </select>
+                </div>
+                <div class="filter_category">
+                    <span class="filter_title_label">Anul Fabricatiei</span>
+                    <div class="multiple_inputs_cont">
+                        <input type="number" class="filter_input dep_field" min="1987" max="2020" disabled>
+                        <input type="number" class="filter_input dep_field" min="1987" max="2020" disabled>
+                    </div>
+                </div>
+                <div class="filter_category">
+                    <span class="filter_title_label">Kilometraj</span>
+                    <div class="multiple_inputs_cont">
+                        <input type="number" class="filter_input dep_field" min="0" disabled>
+                        <input type="number" class="filter_input dep_field" min="0" disabled>
+                    </div>
+                </div>
+                <div class="filter_category">
+                    <span class="filter_title_label">Combustibil</span>
+                    <div class="multiple_inputs_cont">
+                       <div>
+                            <input type="checkbox" class="dep_field" disabled>
+                            <span>Diesel</span>
+                       </div>
+                       <div>
+                            <input type="checkbox" class="dep_field" disabled>
+                            <span>Benzina</span>
+                      </div>
+                      <div>
+                            <input type="checkbox" class="dep_field" disabled>
+                            <span>Electrica</span>
+                      </div> 
+                      <div>
+                            <input type="checkbox" class="dep_field" disabled>
+                            <span>Hibrid</span>
+                     </div>
+                     <div>
+                            <input type="checkbox" class="dep_field" dsiabled>
+                            <span>Toate</span>
+                     </div>
+                    </div>
+                </div>
+                
+                <div class="filter_category" id="buttons_container">
+                    <input type="submit" class="submit_button" value="Cauta" disabled>
+                    <input type="submit" class="submit_button" value="Reset" disabled onclick="reset_filters(this)">
+                </div>
+            </section>
+
+            <section class="mini_views_container">
+                <section class="cars_posts_container">
+                </section>
+                <hr class="buttons_del_line">
+                <section class="menu_buttons_container">
+                    <i class='fas fa-angle-left arr'></i>
+                    <span class="page_index_container">1/<sub>100</sub></span>
+                    <i class='fas fa-angle-right arr'></i>
+                </section>
+            </section>
+        </section>
+        <script src="./filter_script.js"></script>
+    </body>
+</html>

@@ -8,6 +8,9 @@ class PostModelClass{
     public function __construct(){
         $this->conn=(new DatabaseInit())->get_db_conn();
     }
+    public function insert_post($id_brand,$id_model,$an_fab,$kilom,$cap_cil,$cp,$norma_p,$emisii,$numar_portiere,$culoare_car,$tara_orig,$detalii,$pictures_list){
+        
+    }
     public function get_brands(){
         $sql_querry="SELECT NUME_BRAND FROM BRANDURI";
         $stmt=$this->conn->prepare($sql_querry);
