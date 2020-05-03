@@ -14,6 +14,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
         <link rel="stylesheet" href="./home_page_style.css">
         <link rel="stylesheet" href="../Components/footer/footer_Style.css">
         <link rel="stylesheet" href="./filter_page_view_style.css">
+        <link rel="stylesheet" href="../Components/mini_view/mini_view.css">
     </head>
     <body>
         <header id="header_bar">
@@ -108,23 +109,23 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                         <span class="filter_title_label">Combustibil</span>
                         <div class="multiple_inputs_cont">
                            <div>
-                                <input type="checkbox" class="dep_field" value="diesel" name="comb[]">
+                                <input type="checkbox" class="dep_field" value="diesel" name="comb[]" <?php if(isset($_SESSION['comb']) && in_array("diesel",$_SESSION['comb'])){echo "checked";}?>>
                                 <span>Diesel</span>
                            </div>
                            <div>
-                                <input type="checkbox" class="dep_field" value="benzina" name="comb[]">
+                                <input type="checkbox" class="dep_field" value="benzina" name="comb[]" <?php if(isset($_SESSION['comb']) && in_array("benzina",$_SESSION['comb'])){echo "checked";}?>>
                                 <span>Benzina</span>
                           </div>
                           <div>
-                                <input type="checkbox" class="dep_field" value="electrica" name="comb[]">
+                                <input type="checkbox" class="dep_field" value="electrica" name="comb[]" <?php if(isset($_SESSION['comb']) && in_array("electrica",$_SESSION['comb'])){echo "checked";}?>>
                                 <span>Electrica</span>
                           </div> 
                           <div>
-                                <input type="checkbox" class="dep_field" value="hibrid" name="comb[]">
+                                <input type="checkbox" class="dep_field" value="hibrid" name="comb[]" <?php if(isset($_SESSION['comb']) && in_array("hibrid",$_SESSION['comb'])){echo "checked";}?>>
                                 <span>Hibrid</span>
                          </div>
                          <div>
-                                <input type="checkbox" class="dep_field" value="toate" name="comb[]">
+                                <input type="checkbox" class="dep_field" value="toate" name="comb[]" <?php if(isset($_SESSION['comb']) && in_array("toate",$_SESSION['comb'])){echo "checked";}?>>
                                 <span>Toate</span>
                          </div>
                         </div>
@@ -138,6 +139,42 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
             
                 <section class="mini_views_container">
                     <section class="cars_posts_container">
+                        <?php
+                            if(isset($_SESSION['result'])){
+                                $result=$_SESSION['result'];
+                                for($i=0;$i<count($result);$i++){
+                                    ?>
+                                    <section class="mini_view_container">
+                                        <div class="picture_container">
+                                            <img class="mini_view_img" src="https://s1.cdn.autoevolution.com/images/news/next-bmw-2-series-coupe-will-be-rwd-and-we-it-cant-come-soon-enough-138677_1.jpg">
+                                        </div>
+                                        <div class="info_container">
+                                            <div class="car_desc">
+                                                <span class="car_brand_name"><?php echo $result[$i]['nume_brand']; ?></span>
+                                                <span class="car_model_name"><?php echo $result[$i]['nume_model']; ?></span>
+                                            </div> 
+                                            <div class="car_price"> 
+                                                <span class="price"><?php echo $result[$i]['price']; ?></span> <sup class="eur_label"> EUR</sup>
+                                            </div>  
+                                        </div>
+                                    </section>
+                                    <?php    
+                                }
+                            }else{
+                                //show no results found message
+                            }
+
+                        ?>
+
+
+
+
+
+
+
+
+
+
                     </section>
                     <hr class="buttons_del_line">
                     <section class="menu_buttons_container">

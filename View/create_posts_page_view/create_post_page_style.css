@@ -57,6 +57,10 @@ body{
     background-color:white;
     color: #1F45FC;
 }
+.field_tag:disabled{
+    background-color:gray;
+    color:white;
+}
 .field_container{
     width:auto;
     display:flex;
@@ -101,6 +105,16 @@ body{
     background-color: white;
     color:#3090C7;
     border-color:#3090C7;
+}
+.error_container{
+    width:300px;
+    color:yellow;
+    font-weight: bold;
+    font-size:12px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align:right;
+    margin-bottom:5px;
+
 }
 /*
 *{

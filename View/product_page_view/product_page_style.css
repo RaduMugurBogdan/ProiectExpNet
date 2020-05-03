@@ -17,16 +17,39 @@ body{
     flex-direction: column;
     box-shadow: 0px 1px 15px black;
 }
-
-#picture_panel{
-    height:700px
+#picture_counter{
+    font-size:20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color:rgb(0,127,255);
 }
-#pictures_list_panel{
+#picture_panel{
+    height:700px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#buttons_list_panel{
     border-top-style:solid;
     border-width: 1px;
-    height:100px
+    height:100px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
-
+i.fa{
+    font-size:25px;
+    font-weight: bold;
+    margin-left:20px;
+    margin-right:20px;
+    color:rgb(0,127,255);   
+}
+i.fa:active{
+    color:lightblue;
+}
 
 #product_info_panel{
     padding-top: 20px;
@@ -43,7 +66,7 @@ body{
 }
 .del_line{
     color:black;
-    width: 80%;;
+    width: 100%;;
     margin-top: 25px;
     margin-bottom: 25px;
 }
@@ -92,24 +115,26 @@ body{
 }
 
 .info_label{
-    font-weight: 15px;
+    font-size: 15px;
     font-weight: bold;
 
 }
 .info_container{
     margin-top:10px;
 }
-.info_cont_label{
-}
-
-
 
 
 #product_info_container{
+    background-color: rgb(0,127,255);
+    color:white;
     width:1500px;
     height:auto;
-    border-style:solid;
+    box-shadow: 0px 0px 10px black;
     margin-top:50px;
+    padding-left: 10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .info_section{
     display: flex;
@@ -124,11 +149,13 @@ body{
     flex-direction: column;
     justify-content:flex-start;
     width: 800px;
+    margin-top:20px;
+    margin-bottom:20px;
 }
 .info_item{
     display:flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     margin-left:50px;
 }
 .info_title,.info_value{
@@ -144,10 +171,14 @@ body{
     margin-bottom:5px;
     width:80%;
 }
+.car_picture{
+    width:90%;
+    height:90%;
+    display:none;
+}
 /*
 *{
     border-style:solid;
     border-color: black;
     border-width: 1px;
-}
-*/
+}*/

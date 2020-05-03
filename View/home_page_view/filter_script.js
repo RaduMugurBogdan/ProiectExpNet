@@ -3,7 +3,6 @@ function reset_filters(input_object){
     document.getElementById("brand_input_id").value="Alege";
     change_brand(document.getElementById("brand_input_id"));
     document.getElementById("model_input_id").value="Alege";
-    change_model(document.getElementById("model_input_id"));
     dep_fields=document.getElementsByClassName('dep_field');
     for(i=0;i<dep_fields.length;i++){
         dep_fields[i].value="";
@@ -75,15 +74,15 @@ function change_brand(input_object){
         set_fields_empty();
     }else{
         document.getElementById("model_input_id").disabled=false;
-        set_access_to_fields("submit_button",false);
+            set_access_to_fields("submit_button",false);
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var my_object = JSON.parse(this.responseText);
             mod_object=document.getElementById('model_input_id');
-            mod_object.innerHTML="<option>Alege</option>";
+            mod_object.innerHTML="<option selected>Alege</option>";
             for(i=0;i<my_object.length;i++){
-                aux_cont="<option>"+my_object[0]['NUME_MODEL']+"</option>";
+                aux_cont="<option>"+my_object[i]['NUME_MODEL']+"</option>";
                 mod_object.innerHTML=mod_object.innerHTML+aux_cont;
             }
         }
@@ -137,10 +136,8 @@ function validate_fields(object_min_id,object_max_id){
 function perform_request(input_object){
     brand=document.getElementById("brand_input_id");
     model=document.getElementById("model_input_id");
-    if(model.value.trim()!="Alege"){
-        validate_fields("start_year","final_year");
-        validate_fields("start_kil","final_kil");
-        validate_fields("start_price","final_price");
-    }
+    validate_fields("start_year","final_year");
+    validate_fields("start_kil","final_kil");
+    validate_fields("start_price","final_price");
     this.submit();
 }
