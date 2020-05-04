@@ -19,7 +19,6 @@ function set_access_to_fields(class_name,access_value){
     }
 }
 function set_dep_fields_value(brand_name,model_name){
-    set_access_to_fields("dep_field",false);
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -74,7 +73,7 @@ function change_brand(input_object){
         set_fields_empty();
     }else{
         document.getElementById("model_input_id").disabled=false;
-            set_access_to_fields("submit_button",false);
+        set_access_to_fields("submit_button",false);
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -99,64 +98,58 @@ function change_brand(input_object){
 
 function change_model(input_object){
     if(input_object.value.trim()=="Alege"){
-        set_access_to_fields("dep_field",true);
+        //set_access_to_fields("dep_field",true);
         //set_fields_empty();
         set_dep_fields_value(brand_value,"Altele");
     }else{
-        set_access_to_fields("dep_field",false);
+        //set_access_to_fields("dep_field",false);
         brand_value=document.getElementById('brand_input_id').value.trim();
         model_value=input_object.value.trim();
         set_dep_fields_value(brand_value,model_value);
     }
 }
 
-function validate_fields(object_min_id,object_max_id){
-    first_object=document.getElementById(object_min_id);
-    last_object=document.getElementById(object_max_id);
-    first_ob_min=first_object.min;
-    first_ob_max=first_object.max;
-    first_ob_value=first_object.value;
-    last_ob_min=last_object.min;
-    last_ob_max=last_object.max;
-    last_ob_value=last_object.value;
-
-    if(first_ob_value=="" || (first_ob_value>=first_ob_min && first_ob_value<=first_ob_max)==false){
-        first_object.value=first_ob_min;
+function validate_fields(input_object,object_min_id,object_max_id){
+    min_object=document.getElementById(object_min_id);
+    max_object=document.getElementById(object_max_id);
+    if(min_object.value=="" || (min_object.value<min_object.max || min_object.value>min_object.max)){
+        min_object.value=min_object.min;
     }
-    if(last_ob_value=="" || (last_ob_value>=last_ob_min && last_ob_value<=last_ob_max)==false){
-        last_object.value=last_ob_max;
+    if(max_object.value=="" || (max_object.value<max_object.max || max_object.value>max_object.max)){
+        max_object.value=max_object.max;
     }
-    if(first_ob_value>last_ob_value){
-        first_object.value=first_ob_min;
-        first_object.value=first_ob_min;
+    if(min_object.value>max_object.value){
+        min_object.value=min_object.min;
+        max_object.value=max_object.max;
     }
 }
 
 
-function perform_request(input_object){
-    brand=document.getElementById("brand_input_id");
-    model=document.getElementById("model_input_id");
+function perform_request(input_object){/*
     validate_fields("start_year","final_year");
     validate_fields("start_kil","final_kil");
-    validate_fields("start_price","final_price");
-    this.submit();
+    validate_fields("start_price","final_price");*/
+    document.getElementById("my_form").submit();
 }
 
 /***************************products load*************************************************/
 
 var curent_page=1;//pagina curenta
 var pages_number;//numarul de pagini
-var max_items_page=2;//numarul maxim de produse acceptat pe o prezentare
+var max_items_page=15;//numarul maxim de produse acceptat pe o prezentare
 var items_number;//numarul total de postari
+set_all_hidden();
 function init_pages(){
     items_number=document.getElementsByClassName("mini_view_container").length;
     if(items_number!=0){    
         pages_number=Math.floor(items_number/max_items_page)+1*(items_number%max_items_page!=0);
         elements=document.getElementsByClassName("mini_view_container");
-        for(i=0;i<items_number%max_items_page;i++){
+        for(i=0;i<max_items_page && i<items_number;i++){
             elements[i].style.display="flex";
         }
         modify_front();
+    }else{
+        document.getElementById("menu_buttons_container").style.display="none";
     }
 }
 
@@ -164,16 +157,18 @@ function modify_front(){
     document.getElementById("page_index_container").innerHTML=curent_page+"/<sub>"+pages_number+"</sub>";
 }
 function set_all_hidden(){
-    for(element in document.getElementsByClassName("mini_view_container")){
-        element.display="none";
+    elements=document.getElementsByClassName("mini_view_container");
+    for(i=0;i<elements.length;i++){
+        elements[i].style.display="none";
     }
 }
+
 function next_page(){
     if(curent_page<pages_number){
         set_all_hidden();
         curent_page++;
         elements=document.getElementsByClassName("mini_view_container");
-        for(i=((curent_page-2)*items_number)%items_number;i<((curent_page-1)*items_number)%items_number;i++){
+        for(i=((curent_page-1)*max_items_page)%items_number;i<=(curent_page*max_items_page)%items_number;i++){
             elements[i].style.display="flex";
         }
         modify_front();
@@ -184,7 +179,7 @@ function preview_page(){
         set_all_hidden();
         curent_page--;
         elements=document.getElementsByClassName("mini_view_container");
-        for(i=((curent_page-2)*items_number)%items_number;i<((curent_page-1)*items_number)%items_number;i++){
+        for(i=((curent_page-1)*max_items_page)%items_number;i<=(curent_page*max_items_page)%items_number;i++){
             elements[i].style.display="flex";
         }
         modify_front();

@@ -1,25 +1,33 @@
-Tema site-ului este cea a unui site de vanzari auto 
-Site-ul este alcatuit din doua componente (Componenta utilizator si componenta administrator);
+Tema site-ului este cea a unui site de vanzari auto(secondhand)
+
 Componenta Utilizator va pune la dispozitia clientului urmatoarele functionalitati;
-    1.Cautarea obiectelor de interes cat si filtrarea acestora
-    2.Posibilitatea de a mentine o lista de obiecte favorite asociata contului curent
+    1.Cautarea obiectelor de interes pe baza unei liste de filtre acestora
+    2.Posibilitatea de a crea o lista de obiecte favorite asociate contului curent
     3.Posibilitatea de a crea un cont de utilizator cat si de a-i aduce modificari ulterioare
     4.Pe baza contului de utilizator se vor putea face postari de obiecte proprii.
 
-Componenta Administrator va pune la dispozitia administratorului urmatoarele functionalitati
-    1.Acces deplin la conturile clientilor
-    2.Posibilitatea de posta diverse reclame. 
-    3.Acces la corectarea sau inlaturarea produselor ce nu corespund conform descrierii.
-    4.Posibilitatea de a  crea alte conturi de administrator 
 
-
-
+Pagini
+    1.Pagina principala:pe aceasta pagina se pot efectua cautarile 
+    2.Pagina de login
+    3.Pagina de creare cont
+    4.Pagina de control asociata contului(contine lista de favorite,postarile proprii,si setarile contului)
+    5.Pagina de creare postare
 -----------------------------------------------------------------------------
 Schema bazei de date
     Tabele:
-                1.Conturi clienti
-                2.Conturi administratori
-                3.Tabela Brand
-                4.Tabela Model
-                5.Tabela Dotari
-                6.Tabel Descrere
+                1.Tabela Accounts
+                2.Tabela Branduri
+                3.Tabela Modele
+                4.Tabela Brand_Model_Pivot
+                5.Tabela postari
+                6.Tabela poze
+
+    1.Tabela Accounts va retine datele utilizatorilor in urma procesului de crearea a contului
+    2.Tabela Branduri va retine toate numele potentiale de Branduri
+    3.Tabela Modele va retine toate numele de modelte potentiale pentru fiecare brand din tabela Branduri
+    //Tabelele Brandur si Modele sunt utilizate in procesul de creare a unei postari,deoarece atunci cand un utilizator incearca introducerea
+    //unui brand si/sau model datele introduse trebuie sa fie valide(nu este permisa introducerea de branduri sau modele fictive); 
+    4.Tabela Brand_Model_Pivot este o tabela ce retine asocierile  brandurilor cu modelele;
+    5.Tabela postari retine toate datele necesare unei postari
+    6.Tabela poze retine pozele asociate fiecarei postari

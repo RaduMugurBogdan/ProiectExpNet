@@ -38,16 +38,18 @@ if(isset($_POST['brand']) && trim($_POST['brand'])!="Alege"){
     }
     
     $comb_list="";
-    if(isset($_POST['comb'])){
+    if(isset($_POST['comb'])){ 
         $_SESSION['comb']=$_POST['comb'];
-        $comb_list=" AND UPPER(CARBURANT) IN (";
-        for($i=0;$i<count($_POST['comb']);$i++){
-            $comb_list=$comb_list.strtoupper("'".$_POST['comb'][$i]."'");
-            if($i<count($_POST['comb'])-1){
-                $comb_list=$comb_list.",";
+        if(strtoupper($_POST['comb'][count($_POST['comb'])-1])!="TOATE"){
+            $comb_list=" AND UPPER(CARBURANT) IN (";
+            for($i=0;$i<count($_POST['comb']);$i++){
+                $comb_list=$comb_list.strtoupper("'".$_POST['comb'][$i]."'");
+                if($i<count($_POST['comb'])-1){
+                    $comb_list=$comb_list.",";
+                }
             }
+            $comb_list.=")";
         }
-        $comb_list.=")";
     }
     $query="SELECT DISTINCT * FROM BRANDURI JOIN POSTARI ON BRANDURI.ID=POSTARI.ID_BRAND JOIN MODELE ON POSTARI.ID_MODEL=MODELE.ID WHERE
             UPPER(NUME_BRAND)=UPPER('${brand_name}')
@@ -55,7 +57,15 @@ if(isset($_POST['brand']) && trim($_POST['brand'])!="Alege"){
             AND AN_FABRICATIE>='${min_year}' AND AN_FABRICATIE<='${max_year}'
             AND KILOMETRI>='${min_kil}' AND KILOMETRI<='${max_kil}'
              ${comb_list}";
-}
+}/*
+echo "<pre>";
+print_r($_SESSION);
+
+echo $query;
+die();
+*/
+
+
 $stmt=$conn->prepare($query);
 $stmt->execute();
 $result=$stmt->fetchAll();

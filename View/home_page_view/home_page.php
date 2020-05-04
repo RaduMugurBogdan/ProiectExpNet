@@ -27,7 +27,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
 
         <section class="super_container">
             <section class="main_container"> 
-                <form class="filter_container"  method="post" action="../../Model/perform_request.php">
+                <form class="filter_container" id="my_form" method="post" action="../../Model/perform_request.php">
                 <div class="filter_label">Filtre</div>
                     <div class="filter_category">
                         <span class="filter_title_label">Brand</span>
@@ -43,7 +43,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                                 echo "</option>";
                                 $result=(new DatabaseInit())->get_all_valid_brands();
                                 for($i=0;$i<count($result);$i++){
-                                    if(isset($_SESSION['brand'])){
+                                    if(isset($_SESSION['brand']) && $_SESSION['brand']==$result[$i]['NUME_BRAND']){
                                         echo "<option selected>";
                                     }else{
                                         echo "<option>";
@@ -67,7 +67,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                                 echo "</option>";
                                 $result=(new DatabaseInit())->get_all_valid_models($_SESSION['brand']);
                                 for($i=0;$i<count($result);$i++){
-                                    if(isset($_SESSION['model'])){
+                                    if(isset($_SESSION['model']) && $_SESSION['model']==$result[$i]['NUME_MODEL']){
                                         echo "<option selected>";
                                     }else{
                                         echo "<option>";
@@ -81,8 +81,8 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                     <div class="filter_category">
                         <span class="filter_title_label">Anul Fabricatiei</span>
                         <div class="multiple_inputs_cont">
-                            <input type="number" class="filter_input dep_field" id="start_year" name="start_year"   value="<?php if(isset($_SESSION['min_year'])) echo $_SESSION['min_year']; ?>">
-                            <input type="number" class="filter_input dep_field" id="final_year" name="final_year"  value="<?php if(isset($_SESSION['max_year'])) echo $_SESSION['max_year']; ?>">
+                            <input type="number" class="filter_input dep_field" id="start_year" name="start_year" min="1980"  value="<?php if(isset($_SESSION['min_year'])) echo $_SESSION['min_year']; ?>">
+                            <input type="number" class="filter_input dep_field" id="final_year" name="final_year" min="1980"  value="<?php if(isset($_SESSION['max_year'])) echo $_SESSION['max_year']; ?>">
                         </div>
                     </div>
                     <div class="filter_category">
@@ -126,8 +126,8 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                     </div>
                     
                     <div class="filter_category" id="buttons_container">
-                        <input type="submit" class="submit_button" value="Cauta" onclick="perform_request(this)"> 
-                        <input type="submit" class="submit_button" value="Reset" onclick="reset_filters(this)">
+                        <input type="button" class="submit_button" value="Cauta" onclick="perform_request(this)"> 
+                        <input type="button" class="submit_button" value="Reset" onclick="reset_filters(this)">
                     </div>
                 </form>
             
@@ -163,7 +163,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
 
                     </section>
                     <hr class="buttons_del_line">
-                    <section class="menu_buttons_container">
+                    <section id="menu_buttons_container">
                         <i class="fa fa-arrow-circle-left arr" onclick="preview_page()"></i>
                         <span id="page_index_container"></span>
                         <i class="fa fa-arrow-circle-right arr" onclick="next_page()"></i> 
@@ -171,12 +171,10 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                 </section>
             </section>
             
-            <section class="footer_container">
-            </section>    
+            <?php
+                include '../Components/footer/footer.php';
+            ?>  
         </section>
-
-
-
 
 
         <script src="./filter_script.js"></script>
