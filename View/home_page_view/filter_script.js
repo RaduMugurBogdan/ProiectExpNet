@@ -141,3 +141,53 @@ function perform_request(input_object){
     validate_fields("start_price","final_price");
     this.submit();
 }
+
+/***************************products load*************************************************/
+
+var curent_page=1;//pagina curenta
+var pages_number;//numarul de pagini
+var max_items_page=2;//numarul maxim de produse acceptat pe o prezentare
+var items_number;//numarul total de postari
+function init_pages(){
+    items_number=document.getElementsByClassName("mini_view_container").length;
+    if(items_number!=0){    
+        pages_number=Math.floor(items_number/max_items_page)+1*(items_number%max_items_page!=0);
+        elements=document.getElementsByClassName("mini_view_container");
+        for(i=0;i<items_number%max_items_page;i++){
+            elements[i].style.display="flex";
+        }
+        modify_front();
+    }
+}
+
+function modify_front(){
+    document.getElementById("page_index_container").innerHTML=curent_page+"/<sub>"+pages_number+"</sub>";
+}
+function set_all_hidden(){
+    for(element in document.getElementsByClassName("mini_view_container")){
+        element.display="none";
+    }
+}
+function next_page(){
+    if(curent_page<pages_number){
+        set_all_hidden();
+        curent_page++;
+        elements=document.getElementsByClassName("mini_view_container");
+        for(i=((curent_page-2)*items_number)%items_number;i<((curent_page-1)*items_number)%items_number;i++){
+            elements[i].style.display="flex";
+        }
+        modify_front();
+    }
+}
+function preview_page(){
+    if(curent_page>1){
+        set_all_hidden();
+        curent_page--;
+        elements=document.getElementsByClassName("mini_view_container");
+        for(i=((curent_page-2)*items_number)%items_number;i<((curent_page-1)*items_number)%items_number;i++){
+            elements[i].style.display="flex";
+        }
+        modify_front();
+    }
+}
+

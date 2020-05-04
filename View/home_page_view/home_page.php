@@ -15,19 +15,13 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
         <link rel="stylesheet" href="../Components/footer/footer_Style.css">
         <link rel="stylesheet" href="./filter_page_view_style.css">
         <link rel="stylesheet" href="../Components/mini_view/mini_view.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <header id="header_bar">
-            <div id="logo_container">MyCar</div>
-            <div id="options_container">
-                <div class="fa fa-plus item_icon"></div>
-                <div class="fa fa-star item_icon"></div>
-                <a id="username_container" href="../../Controller/account_controller.php?option=<?php echo $option_value;?>">
-                <div class="fa fa-user-circle-o item_icon"></div>
-                <div><?php if(isset($_SESSION['user_first_name'])){echo $_SESSION['user_first_name'];}?></div>
-                </a>
-            </div>
-        </header>
+    <body onload="init_pages()">
+        <?php
+            //import the header code
+            include '../Components/header/header.php';
+        ?>
 
 
 
@@ -161,26 +155,18 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                                     <?php    
                                 }
                             }else{
-                                //show no results found message
+                                echo "<h1>No results found</h1>";
                             }
-
                         ?>
-
-
-
-
-
-
-
 
 
 
                     </section>
                     <hr class="buttons_del_line">
                     <section class="menu_buttons_container">
-                        <i class='arr'>&#60;</i>
-                        <span class="page_index_container">1/<sub>100</sub></span>
-                        <i class='arr'>&#62;</i>
+                        <i class="fa fa-arrow-circle-left arr" onclick="preview_page()"></i>
+                        <span id="page_index_container"></span>
+                        <i class="fa fa-arrow-circle-right arr" onclick="next_page()"></i> 
                     </section>
                 </section>
             </section>

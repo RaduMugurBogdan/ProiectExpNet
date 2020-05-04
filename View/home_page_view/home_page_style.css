@@ -9,6 +9,12 @@
     margin-top:50px;
     align-self: center;
 }
+.cars_posts_container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-gap:10px;
+    justify-content: center; 
+}
 /*
 *{
     border-style: solid;
