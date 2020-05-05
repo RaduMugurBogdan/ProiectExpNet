@@ -51,13 +51,17 @@ if(isset($_POST['brand']) && trim($_POST['brand'])!="Alege"){
             $comb_list.=")";
         }
     }
-    $query="SELECT DISTINCT * FROM BRANDURI JOIN POSTARI ON BRANDURI.ID=POSTARI.ID_BRAND JOIN MODELE ON POSTARI.ID_MODEL=MODELE.ID WHERE
+    $query="SELECT DISTINCT postari.id id_post,nume_brand,nume_model,price,id_user FROM POSTARI JOIN BRANDURI ON BRANDURI.ID=POSTARI.ID_BRAND JOIN MODELE ON POSTARI.ID_MODEL=MODELE.ID WHERE
             UPPER(NUME_BRAND)=UPPER('${brand_name}')
             ${model_name_var} AND PRICE>='${min_price}' AND PRICE<='${max_price}'
             AND AN_FABRICATIE>='${min_year}' AND AN_FABRICATIE<='${max_year}'
             AND KILOMETRI>='${min_kil}' AND KILOMETRI<='${max_kil}'
              ${comb_list}";
-}/*
+}
+/*
+echo $query;
+die();
+
 echo "<pre>";
 print_r($_SESSION);
 
@@ -70,5 +74,10 @@ $stmt=$conn->prepare($query);
 $stmt->execute();
 $result=$stmt->fetchAll();
 $_SESSION['result']=$result;
+/*
+echo "<pre>";
+print_r($_SESSION['result']);
+die();*/
+
 header("Location:../View/home_page_view/home_page.php");
 ?>

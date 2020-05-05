@@ -7,6 +7,7 @@ body{
 #product_pres_container{
     width:1500px;
     height:800px;
+    margin-top:80px;
     display:flex;
     flex-direction: row;
     box-shadow: 1px 0px 15px black;

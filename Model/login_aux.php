@@ -22,6 +22,7 @@
         $action=$acc_object->perform_login($_POST['email'],$_POST['password']);
         if($action!=null){
             unset($_SESSION['logged_in']);
+            unset($_SESSION['user_id']);
             unset($_SESSION['user_email_address']);
             unset($_SESSION['user_last_name']);
             unset($_SESSION['user_first_name']);
@@ -29,6 +30,7 @@
             unset($_SESSION['user_phone']);
 
             $_SESSION['logged_in']=true;
+            $_SESSION['user_id']=$action[0]['id'];
             $_SESSION['user_email_address']=$action[0]['email'];
             $_SESSION['user_last_name']=$action[0]['last_name'];
             $_SESSION['user_first_name']=$action[0]['first_name'];

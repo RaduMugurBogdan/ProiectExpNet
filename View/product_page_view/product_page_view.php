@@ -15,8 +15,14 @@
         <title>Product page</title>
         <link rel="stylesheet" href="./product_page_style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../Components/header/header_style.css">
+        <link rel="stylesheet" href="../Components/footer/footer_style.css">
     </head>
     <body>
+        <?php
+            //import the header code
+            include '../Components/header/header.php';
+        ?>
         <section id="product_pres_container">
             <section id="product_pictures_panel">
                 <section id="picture_panel">
@@ -115,6 +121,9 @@
                 <spna><?php echo $product_info[0]['detalii'] ?></span>
             </section>
         </section>
+        <?php
+                include '../Components/footer/footer.php';
+        ?>  
         <script src="./aux_script.js"></script>       
     </body>
 </html>

@@ -53,7 +53,12 @@ function set_dep_fields_value(brand_name,model_name){
 
             }
         };
-        xmlhttp.open("GET", "../../Model/get_dep_db_api.php?brand="+brand_name+"&model="+model_name, true);
+        if(model_name!=""){
+            xmlhttp.open("GET", "../../Model/get_dep_db_api.php?brand="+brand_name+"&model="+model_name, true);
+        }else{ 
+            xmlhttp.open("GET", "../../Model/get_dep_db_api.php?brand="+brand_name, true);
+        }
+        
         xmlhttp.send();
 }
 
@@ -84,26 +89,27 @@ function change_brand(input_object){
                 aux_cont="<option>"+my_object[i]['NUME_MODEL']+"</option>";
                 mod_object.innerHTML=mod_object.innerHTML+aux_cont;
             }
+            set_access_to_fields("dep_field",false);
+            brand_value=document.getElementById('brand_input_id').value.trim();
+            set_dep_fields_value(brand_value,"");
         }
         };
         xmlhttp.open("GET", "../../Model/get_models_db_api.php?brand="+input_object.value.trim(), true);
         xmlhttp.send();
-        set_access_to_fields("dep_field",false);
-        brand_value=document.getElementById('brand_input_id').value.trim();
-        set_dep_fields_value(brand_value,"Altele");
+        
     }
 }
 
 
 
 function change_model(input_object){
+    brand_value=document.getElementById('brand_input_id').value.trim();
     if(input_object.value.trim()=="Alege"){
         //set_access_to_fields("dep_field",true);
         //set_fields_empty();
-        set_dep_fields_value(brand_value,"Altele");
+        set_dep_fields_value(brand_value,"");
     }else{
         //set_access_to_fields("dep_field",false);
-        brand_value=document.getElementById('brand_input_id').value.trim();
         model_value=input_object.value.trim();
         set_dep_fields_value(brand_value,model_value);
     }
@@ -136,7 +142,7 @@ function perform_request(input_object){/*
 
 var curent_page=1;//pagina curenta
 var pages_number;//numarul de pagini
-var max_items_page=15;//numarul maxim de produse acceptat pe o prezentare
+var max_items_page=1000;//numarul maxim de produse acceptat pe o prezentare
 var items_number;//numarul total de postari
 set_all_hidden();
 function init_pages(){

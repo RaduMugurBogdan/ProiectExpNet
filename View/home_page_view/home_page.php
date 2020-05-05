@@ -12,7 +12,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../Components/header/header_style.css">
         <link rel="stylesheet" href="./home_page_style.css">
-        <link rel="stylesheet" href="../Components/footer/footer_Style.css">
+        <link rel="stylesheet" href="../Components/footer/footer_style.css">
         <link rel="stylesheet" href="./filter_page_view_style.css">
         <link rel="stylesheet" href="../Components/mini_view/mini_view.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -138,20 +138,22 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
                                 $result=$_SESSION['result'];
                                 for($i=0;$i<count($result);$i++){
                                     ?>
-                                    <section class="mini_view_container">
-                                        <div class="picture_container">
-                                            <img class="mini_view_img" src="https://s1.cdn.autoevolution.com/images/news/next-bmw-2-series-coupe-will-be-rwd-and-we-it-cant-come-soon-enough-138677_1.jpg">
-                                        </div>
-                                        <div class="info_container">
-                                            <div class="car_desc">
-                                                <span class="car_brand_name"><?php echo $result[$i]['nume_brand']; ?></span>
-                                                <span class="car_model_name"><?php echo $result[$i]['nume_model']; ?></span>
-                                            </div> 
-                                            <div class="car_price"> 
-                                                <span class="price"><?php echo $result[$i]['price']; ?></span> <sup class="eur_label"> EUR</sup>
-                                            </div>  
-                                        </div>
-                                    </section>
+                                    <a href="http://localhost/ProiectExpNet/View/product_page_view/product_page_view.php?post_id=<?php echo $result[$i]['id_post'];?>">
+                                        <section class="mini_view_container">
+                                            <div class="picture_container">
+                                                <img class="mini_view_img" src="https://s1.cdn.autoevolution.com/images/news/next-bmw-2-series-coupe-will-be-rwd-and-we-it-cant-come-soon-enough-138677_1.jpg">
+                                            </div>
+                                            <div class="info_container">
+                                                <div class="car_desc">
+                                                    <span class="car_brand_name"><?php echo $result[$i]['nume_brand']; ?></span>
+                                                    <span class="car_model_name"><?php echo $result[$i]['nume_model']; ?></span>
+                                                </div> 
+                                                <div class="car_price"> 
+                                                    <span class="price"><?php echo $result[$i]['price']; ?></span> <sup class="eur_label"> EUR</sup>
+                                                </div>  
+                                            </div>
+                                        </section>
+                                    </a>
                                     <?php    
                                 }
                             }else{

@@ -6,11 +6,14 @@ session_start();
         <link rel="stylesheet" href="./personal_posts_page_style.css">
         <style>
             <?php
+                include '../../Model/personal_posts_model.php';
                 if(empty($_GET['page'])==false){    
                     echo "#".$_GET['page']."{color:red;}";
+
                 }else{
                     header("Location: ./personal_posts_page.php?page=postari_id");
-                }                                           
+                }
+
             ?>
         </style>
     <meta http-equiv="Cache-control" content="no-cache">
@@ -30,7 +33,7 @@ session_start();
             </section>
             <a href="../../Controller/account_controller.php?option=logg_out" id="logg_oout_button_cont">
             <button id="logg_out_button">
-                Logg Out
+                Log Out
             </button>
             </a>
         </section>
@@ -41,6 +44,7 @@ session_start();
                 <span class="posts_label" ><a id="cont_id" href="./personal_posts_page.php?page=cont_id">Cont</a></span>
             </section>
             <hr class="contact_del_line">
+            
             <form class="user_content" id="cont_container">
                     <div class="error_label">
                         <?php if(isset($_SESSION['email_error'])) echo $_SESSION['email_error'] ?>
@@ -101,7 +105,7 @@ session_start();
                     <div id="buttons_panel">
                         <input type="submit" value="Modifica" class="user_button">    
                     </div>
-            </section>
+            </form>
         </section>
     </section>
     </body>

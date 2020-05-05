@@ -3,6 +3,7 @@
 $request = $_SERVER['REQUEST_URI'];
 $path= explode("/",$request);
 
+include './Controller/account_controller.php';
 
 switch ($path[2]) {
     case '' : 
@@ -14,16 +15,10 @@ switch ($path[2]) {
     case 'add_post'://adaugare postare
         break;
     case 'login': //proces de login
-        echo $_SERVER['DOCUMENT_ROOT'];
-        exit;
-        //header('Location:login');
-        //include getcwd().'/Controller/account_controller.php';
-        //new AccountController('login');
+        new AccountController('login');
         break;
     case 'create_account'://creare cont
-        //header('Location.\Controller\account_controller.php?option=create_account');
-        //include __DIR__.'\Controller\account_controller.php';
-        //new AccountController('create_account');
+        new AccountController('create_account');
         break;
     case 'account_config': //modificare cont(postari proprii,lista de favorite,modificare date de contact si date credentiale)
         include __DIR__.'\Controller\account_controller.php';

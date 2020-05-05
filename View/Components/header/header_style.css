@@ -53,6 +53,12 @@ div.item_icon{
    font-size:15px;
    font-family: Arial, Helvetica, sans-serif;
 }
+.aux_box{
+    font-size:15px;
+    color:white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
 /*
 *{
     border-style: solid;

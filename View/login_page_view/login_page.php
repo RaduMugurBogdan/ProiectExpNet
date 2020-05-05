@@ -30,7 +30,9 @@
             <hr class="sep_hr">
             <div id="buttons_panel">
                 <input type="submit" value="Login" class="user_button">
-                <input type="button" value="Creare Cont" class="user_button">    
+                <a href="http://localhost/ProiectExpNet/Controller/account_controller.php?option=create_account">
+                <input type="button" value="Creare Cont" class="user_button">
+                </a>    
             </div>
         </form>
 
