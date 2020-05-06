@@ -87,7 +87,9 @@ i.fa:active{
 }
 .fav_button:hover{
     background-color:dodgerblue;
-
+}
+.fav_button:disabled{
+    background-color:gray;
 }
 
 #fav_button_panel{

@@ -1,10 +1,17 @@
 <?php
+    session_start();
     include '../../Model/product_page_model.php';
     $product_info=null;
+    $user_id="";
+    $post_id="";
     if(isset($_GET['post_id'])){
         $product_info=get_post_info($_GET['post_id']);
         if($product_info==false){
             header("Location:../home_page_view/home_page.php");
+        }
+        if(isset($_SESSION['user_id'])){
+            $user_id=$_SESSION['user_id'].',';
+            $post_id=$_GET['post_id'];
         }
     }else{
         header("Location:../home_page_view/home_page.php");
@@ -18,7 +25,7 @@
         <link rel="stylesheet" href="../Components/header/header_style.css">
         <link rel="stylesheet" href="../Components/footer/footer_style.css">
     </head>
-    <body>
+    <body onload="get_onload_fav_value(<?php echo $user_id.''.$post_id;?>)">
         <?php
             //import the header code
             include '../Components/header/header.php';
@@ -45,8 +52,12 @@
                 <div id="price_container"><span id="price_label">Pret: </span><span id="price_value"><?php echo $product_info[0]['price'] ?></span><sub>   EUR</sub></div>
                 <hr class="del_line">
                 <div id="fav_button_panel">
+
+
                     <button class="fav_button">Pagina Proprietarului</button>
-                    <button class="fav_button">Adauga la favorite</button>
+                    
+                    <button class="fav_button" id="fav_button_id" onclick="favorite_action(<?php echo $user_id.''.$post_id;?>)" <?php if(isset($_SESSION['user_id'])==false){ echo "disabled";}?>>Adauga la favorite</button>        
+            
                 </div>
                 <hr class="del_line">
                 <div id="contacts_panel">

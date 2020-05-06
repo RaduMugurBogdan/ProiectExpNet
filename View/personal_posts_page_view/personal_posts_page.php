@@ -1,9 +1,13 @@
 <?php
 session_start();
+if(isset($_SESSION['user_id'])==false){
+    header("Location: ../home_page_view/home_page.php"); 
+}
 ?>
 <html>
     <head>
         <link rel="stylesheet" href="./personal_posts_page_style.css">
+        <link rel="stylesheet" href="../Components/mini_personal_view/mini_personal_view.css">
         <style>
             <?php
                 include '../../Model/personal_posts_model.php';
@@ -31,7 +35,7 @@ session_start();
                 <div class="contact_item"><div class="contact_label">E-main</div><div class="contact_value"><?php if(isset($_SESSION['logged_in'])){echo $_SESSION['user_email_address'];}?></div></div>
                 <div class="contact_item"><div class="contact_label">Adresa</div><div class="contact_value"><?php if(isset($_SESSION['logged_in'])){echo $_SESSION['user_address'];}?></div></div>
             </section>
-            <a href="../../Controller/account_controller.php?option=logg_out" id="logg_oout_button_cont">
+            <a href="../../Controller/account_controller.php?option=logg_out" id="logg_out_button_cont">
             <button id="logg_out_button">
                 Log Out
             </button>
@@ -45,68 +49,39 @@ session_start();
             </section>
             <hr class="contact_del_line">
             
-            <form class="user_content" id="cont_container">
-                    <div class="error_label">
-                        <?php if(isset($_SESSION['email_error'])) echo $_SESSION['email_error'] ?>
-                    </div>
-                    <div class="input_data_panel">
-                        <div class="input_label">E-mail</div>
-                        <input type="text" class="input_box" name="email" value="<?php  if(isset($_SESSION['valid_email'])){echo $_SESSION['valid_email'];} ?>">
-                    </div>
-                    <div class="error_label">
-                        <?php if(isset($_SESSION['password_error'])) echo $_SESSION['password_error'] ?>
-                    </div>
-                    <div class="input_data_panel">
-                        <div class="input_label">Parola</div>
-                        <input type="password" class="input_box" name="password" value="<?php if(isset($_SESSION['valid_password'])){echo $_SESSION['valid_password'];} ?>">
-                    </div>
-                    
-                    <div class="error_label">
-                        <?php if(isset($_SESSION['conf_password_error'])) echo $_SESSION['conf_password_error'] ?>
-                    </div>
-                    <div class="input_data_panel">
-                        <div class="input_label">Confirma Parola</div>
-                        <input type="password" class="input_box" name="conf_password" value="<?php if(isset($_SESSION['valid_conf_password'])){echo $_SESSION['valid_conf_password'];} ?>">
-                    </div>
-                    
-                    <div class="error_label">
-                        <?php if(isset($_SESSION['last_name_error'])) echo $_SESSION['last_name_error'] ?>
-                    </div>
+            <section class="user_content" id="cont_container">
+                   <?php
+                        if($_GET['page']=='favorite_id'){
+                            include '../../Model/favorite_model.php';
+                            $aux_object=new FavoritePostsModel();
+                            $fav_objects=$aux_object->get_user_favorite_posts($_SESSION['user_id']);
+                            
+                            foreach($fav_objects as $aux){
+                    ?>            
+                                <section class="main_posts_container">
+                                        <section class="post_container">
+                                            <section class="mini_view_info">
+                                                <section class="mini_view_picture">
+                                                    <img class="picture">
+                                                </section>
+                                                <section class="mini_view_labels">   
+                                                    <span class="brand_name_container"><?php echo $aux['NUME_BRAND']; ?></span>
+                                                    <span class="model_name_container"><?php echo $aux['NUME_MODEL']; ?></span> 
+                                                </section>
+                                            </section>
+                                            <section class="options_panel">
+                                                <section class="post_option" onclick="delete_fav(<?php echo $_SESSION['user_id'].','.$aux['FAV_ID']; ?>)">Sterge</section>
+                                            </section>
+                                        </section>
+                                </section>
+                                
+                    <?php
+                            }
+                        }
+                    ?>
 
-                    <div class="input_data_panel">
-                        <div class="input_label">Nume</div>
-                        <input type="text" class="input_box" name="last_name">
-                    </div>
-                    
-                    <div class="error_label">
-                        <?php if(isset($_SESSION['first_name_error'])) echo $_SESSION['first_name_error'] ?>
-                    </div>
-                    
-                    <div class="input_data_panel">
-                        <div class="input_label">Prenume</div>
-                        <input type="text" class="input_box" name="first_name">
-                    </div>
-                
-                    <div class="error_label">
-                        <?php if(isset($_SESSION['phone_error'])) echo $_SESSION['phone_error'] ?>
-                    </div>
-
-                    <div class="input_data_panel">
-                        <div class="input_label">Telefon</div>
-                        <input type="text" class="input_box" name="phone">
-                    </div>
-                    
-
-                    <div class="input_data_panel">
-                        <div class="input_label">Adresa</div>
-                        <textarea class="input_text_area" name="address" id="text_ar"></textarea>
-                    </div>
-                    <hr class="sep_hr">
-                    <div id="buttons_panel">
-                        <input type="submit" value="Modifica" class="user_button">    
-                    </div>
-            </form>
-        </section>
+           </section>
     </section>
+    <script src="./personal_posts.js"></script>
     </body>
 </html>

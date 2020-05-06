@@ -33,6 +33,7 @@ class AccountController{
     }
     private function perform_logg_out(){
         session_destroy();
+        unset($_SESSION);
         header('Location:../View/home_page_view/home_page.php');  
     }
     function dummy_method(){
