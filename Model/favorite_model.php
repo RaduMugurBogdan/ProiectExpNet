@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/init_database.php';
+include_once __DIR__.'/init_database.php';
 class FavoritePostsModel{
     private $conn=null;
 
@@ -37,7 +37,12 @@ class FavoritePostsModel{
         if($this->conn==null){
             return null;
         }
-        $query="SELECT NUME_BRAND,NUME_MODEL,FAVORITE.ID AS FAV_ID FROM POSTARI JOIN FAVORITE ON POSTARI.ID=FAVORITE.POST_ID JOIN BRANDURI ON BRANDURI.ID=POSTARI.ID_BRAND JOIN MODELE ON MODELE.ID=POSTARI.ID WHERE FAVORITE.USER_ID='${user_id}'";
+        $query="SELECT NUME_BRAND,NUME_MODEL,FAVORITE.POST_ID AS FAV_ID,PICTURE FROM POSTARI 
+                        JOIN FAVORITE ON POSTARI.ID=FAVORITE.POST_ID 
+                        JOIN BRANDURI ON BRANDURI.ID=POSTARI.ID_BRAND 
+                        JOIN MODELE ON MODELE.ID=POSTARI.ID_MODEL
+                        JOIN PICTURES ON POSTARI.ID=PICTURES.POST_ID
+                        WHERE POSTARI.ID_USER='${user_id}' GROUP BY POSTARI.ID";
         $stmt=$this->conn->prepare($query);
         $stmt->execute();
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -8,9 +8,12 @@ if(isset($_SESSION['user_id'])==false){
     <head>
         <link rel="stylesheet" href="./personal_posts_page_style.css">
         <link rel="stylesheet" href="../Components/mini_personal_view/mini_personal_view.css">
+        <link rel="stylesheet" href="../Components/header/header_style.css">
+        <link rel="stylesheet" href="../Components/footer/footer_style.css">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
             <?php
-                include '../../Model/personal_posts_model.php';
                 if(empty($_GET['page'])==false){    
                     echo "#".$_GET['page']."{color:red;}";
 
@@ -23,6 +26,11 @@ if(isset($_SESSION['user_id'])==false){
     <meta http-equiv="Cache-control" content="no-cache">
     </head>
     <body> 
+    <?php
+            //import the header code
+            include '../Components/header/header.php';
+    ?>
+
      <section id="main_container">   
         <section id="main_details_container">
             <section id="username_container">
@@ -62,7 +70,7 @@ if(isset($_SESSION['user_id'])==false){
                                         <section class="post_container">
                                             <section class="mini_view_info">
                                                 <section class="mini_view_picture">
-                                                    <img class="picture">
+                                                    <?php echo '<img class="picture" src="data:image/jpeg;base64,'.base64_encode($aux['PICTURE']).'"  />';?>
                                                 </section>
                                                 <section class="mini_view_labels">   
                                                     <span class="brand_name_container"><?php echo $aux['NUME_BRAND']; ?></span>
@@ -70,7 +78,7 @@ if(isset($_SESSION['user_id'])==false){
                                                 </section>
                                             </section>
                                             <section class="options_panel">
-                                                <section class="post_option" onclick="delete_fav(<?php echo $_SESSION['user_id'].','.$aux['FAV_ID']; ?>)">Sterge</section>
+                                                <section class="post_option" onclick="delete_favorite(<?php echo 'this,'.$_SESSION['user_id'].','.$aux['FAV_ID']; ?>)">Sterge</section>
                                             </section>
                                         </section>
                                 </section>
@@ -80,8 +88,44 @@ if(isset($_SESSION['user_id'])==false){
                         }
                     ?>
 
+                    <?php
+                        if($_GET['page']=='postari_id'){
+                            include '../../Model/personal_posts_model.php';
+                            $aux_object=new PersonalPostModel();
+                            $fav_objects=$aux_object->get_personal_posts();
+                            foreach($fav_objects as $aux){
+                    ?>            
+                                <section class="main_posts_container">
+                                        <section class="post_container">
+                                            <section class="mini_view_info">
+                                                <section class="mini_view_picture">
+                                                    <?php echo '<img class="picture" src="data:image/jpeg;base64,'.base64_encode($aux['picture']).'"  />';?>
+                                                </section>
+                                                <section class="mini_view_labels">   
+                                                    <span class="brand_name_container"><?php echo $aux['nume_brand']; ?></span>
+                                                    <span class="model_name_container"><?php echo $aux['nume_model']; ?></span> 
+                                                </section>
+                                            </section>
+                                            <section class="options_panel">
+                                                <section class="post_option">Modifica</section>   
+                                                <section class="post_option" onclick="delete_post(<?php echo 'this,'.$aux['post_id']; ?>)">Sterge</section>
+                                            </section>
+                                        </section>
+                                </section>
+                                
+                    <?php
+                            }
+                        }
+                    ?>
+
+
+
            </section>
+       </section>
     </section>
+    <?php
+        include '../Components/footer/footer.php';
+    ?> 
     <script src="./personal_posts.js"></script>
     </body>
 </html>
