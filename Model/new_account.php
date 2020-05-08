@@ -1,6 +1,7 @@
 <?php
-        include './account_model.php';
         session_start();
+        include './account_model.php';
+        
        
                 if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST["conf_password"]) && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['phone']) && isset($_POST['address'])){
                     $error_checker=false;
@@ -63,17 +64,20 @@
                             unset($_SESSION['user_first_name']);
                             unset($_SESSION['user_address']);
                             unset($_SESSION['user_phone']);
+                            unset($_SESSION['user_id']);
                             $_SESSION['logged_in']=true;
                             $_SESSION['user_email_address']=$_POST['email'];
                             $_SESSION['user_last_name']=$_POST['last_name'];
                             $_SESSION['user_first_name']=$_POST['first_name'];
                             $_SESSION['user_address']=$_POST['address'];
-                            $_SESSION['user_phone']=$_POST['phone'];
+                            $_SESSION['user_phone']=$_POST['phone'];    
                         }
                         header("Location:../View/home_page_view/home_page.php"); 
+                        exit;
                     }      
                 }else{
                     header("Location:../View/create_acc_page_view/create_acc_page.php");
+                    exit;
                 }
              
 ?>

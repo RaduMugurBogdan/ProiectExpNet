@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if(isset($_SESSION)==false){
+        session_start();
+    }
     include '../../Model/product_page_model.php';
     $product_info=null;
     $user_id="";

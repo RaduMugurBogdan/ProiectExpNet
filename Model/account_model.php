@@ -1,4 +1,7 @@
 <?php
+if(isset($_SESSION)==false){
+    session_start();
+}
 class AccountModel{
     private $conn=null;
     private function conn_db(){
@@ -31,6 +34,11 @@ class AccountModel{
                 $password=md5($password);
                 $sql_query="INSERT INTO ACCOUNTS VALUES(null,'{$email}','{$password}','{$first_name}','{$last_name}','{$phone_number}','{$address_details}')";
                 $result=$this->conn->prepare($sql_query)->execute();
+                $sql_query="SELECT ID FROM ACCOUNTS WHERE EMAIL='${email}'";
+                $stmt=$this->conn->prepare($sql_query);
+                $stmt->execute();
+                $result=$stmt->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['user_id']=$result['ID'];
                 return true;
             }else{
                 $_SESSION['email_already_used']=true;

@@ -42,7 +42,7 @@ class FavoritePostsModel{
                         JOIN BRANDURI ON BRANDURI.ID=POSTARI.ID_BRAND 
                         JOIN MODELE ON MODELE.ID=POSTARI.ID_MODEL
                         JOIN PICTURES ON POSTARI.ID=PICTURES.POST_ID
-                        WHERE POSTARI.ID_USER='${user_id}' GROUP BY POSTARI.ID";
+                        WHERE FAVORITE.USER_ID='${user_id}' GROUP BY POSTARI.ID";
         $stmt=$this->conn->prepare($query);
         $stmt->execute();
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);

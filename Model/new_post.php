@@ -1,7 +1,8 @@
 <?php
-session_start();
+if(isset($_SESSION)==false){
+    session_start();
+}
 include './init_database.php';
-$_SESSION['user_id']=12;
 
 if(isset($_SESSION['user_id']) && isset($_POST['brand_name']) && isset($_POST['model_name']) && isset($_POST['price_value']) && isset($_POST['man_year']) && isset($_POST['fuel_type']) && isset($_POST['kils']) && isset($_POST['cil_cap']) && isset($_POST['horse_p'])  && isset($_POST['pol_norm'])  && isset($_POST['emissions']) && isset($_POST['doors_n']) && isset($_POST['color']) && isset($_POST['country']) && isset($_FILES['pictures']) && isset($_POST['ad_details']) ){
     $brand_name=$_POST['brand_name'];
@@ -54,7 +55,8 @@ if(isset($_SESSION['user_id']) && isset($_POST['brand_name']) && isset($_POST['m
             $picture_id++;
         }
     }
-
+    header("Location:http://localhost/ProiectExpNet/home");
+    exit;
 }
  
 ?>

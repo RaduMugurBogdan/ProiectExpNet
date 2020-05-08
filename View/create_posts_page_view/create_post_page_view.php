@@ -2,8 +2,16 @@
     <head>
         <title>Creare Postare</title>
         <link rel="stylesheet" href="./create_post_page_style.css">
+        <link rel="stylesheet" href="../Components/header/header_style.css">
+        <link rel="stylesheet" href="../Components/footer/footer_style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     </head>
     <body onload="prepare_default()">
+        <?php
+                //import the header code
+                include '../Components/header/header.php';
+        ?>
         <form id="post_main_container" method="POST" action="../../Model/new_post.php" enctype="multipart/form-data">
             <div id="title_container">
                 Adauga o postare
@@ -188,6 +196,9 @@
             <hr class="section_del_line">
            <section id="button_container"><input type="button" id="post_button" value="Posteaza" onclick="perform_request(this)"></section>
         </form>
+        <?php
+        include '../Components/footer/footer.php';
+         ?> 
         <script src="./aux_script.js"></script>
     </body>
 </html>
